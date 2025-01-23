@@ -1,4 +1,4 @@
-# WeatherAlerts
+# Weather Alerts
 The app that prioritizes your safety and security over profit.
 
 
