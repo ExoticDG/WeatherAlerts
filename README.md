@@ -2,6 +2,11 @@
 The app that prioritizes your safety and security over profit.
 
 
+
+![Logo](https://github.com/ExoticDG/WeatherAlerts/blob/main/app/src/main/ic_launcher-playstore.png)
+
+
+
 >[!WARNING]
 >
 >**ALL RIGHTS RESERVED**
