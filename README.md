@@ -19,7 +19,7 @@ The app that prioritizes your safety and security over profit.
 >
 
 >[!IMPORTANT]
->This application is only avalible for Android[^1]. As of 1/23/25 I will not be porting this to iOS[^2] and dont plan on ever doing so. Due to multiple reasons such as my dislike for iOS[^2] and the diffrences in coding apps for eatch operating system.
+>This application is only avalible for Android[^1]. As of 1/23/25 I will not be porting this to iOS[^2] and dont plan on ever doing so, due to multiple reasons such as my dislike for iOS[^2] and the diffrences in coding apps for each operating system.
 
 
 
