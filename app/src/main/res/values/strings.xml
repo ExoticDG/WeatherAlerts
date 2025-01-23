@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Weather Alerts</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Weather Alerts</string>
+    <string name="nav_header_subtitle">The app that prioritises your safety and security over profit. </string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="map_title">Please Select Location</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_map">Location Selector</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_ct">Notification Test</string>
+</resources>
