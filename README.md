@@ -15,7 +15,7 @@ The app that prioritizes your safety and security over profit.
 >
 >I.E:
 >
->I (ExotcDarknessGameing) am ***NOT*** responsible or liable for any damages or injuries/deaths that occure in the use of this application and any potenial inaccuracies in the code or alerts.
+>I (ExoticDarknessGaming) am ***NOT*** responsible or liable for any damages or injuries/deaths that occur in the use of this application and any potential inaccuracies in the code or alerts.
 >
 
 >[!IMPORTANT]
