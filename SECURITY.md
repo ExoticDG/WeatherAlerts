@@ -13,4 +13,4 @@ currently being supported with security updates.
 ## Reporting a Vulnerability
 
   You can report a varnerability anywhere I (ExoticDarknessGaming -- ExoticDG) am. When I say anywere I mean anywere, as long as there is a way of makeing sure I get notified of it.
-Wether that by my Youtube chanel or one of the many tabs you can report things in this repo. Anyhting will work.
+Wether that be my Youtube chanel or one of the many tabs you can report things in this repo. Anything will work.
