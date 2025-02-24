@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "WeatherAlerts"
 include(":app")
+include(":weatheralerts_wearos")

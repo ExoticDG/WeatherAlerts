@@ -55,9 +55,14 @@ dependencies {
     implementation(libs.androidx.preference)
     implementation(libs.play.services.maps)
     implementation(libs.androidx.annotation)
+    implementation(libs.androidx.runtime.android)
+    implementation(libs.androidx.ui.android)
+   // implementation(libs.androidx.material3.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("com.google.firebase:firebase-analytics")
     implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
+    implementation(platform("androidx.compose:compose-bom:2025.02.00"))
+
 }
