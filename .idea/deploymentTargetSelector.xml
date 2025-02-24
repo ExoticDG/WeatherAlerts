@@ -2,12 +2,6 @@
 <project version="4">
   <component name="deploymentTargetSelector">
     <selectionStates>
-      <SelectionState runConfigName="Unnamed">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="Weather Alerts">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
       <SelectionState runConfigName="weatheralerts_wearos">
         <option name="selectionMode" value="DROPDOWN" />
         <DropdownSelection timestamp="2025-02-24T21:49:56.481745500Z">
