@@ -13,7 +13,7 @@ android {
         applicationId = "com.exoticdg.weatheralerts"
         minSdk = 30
         targetSdk = 35
-        versionCode = 0
+        versionCode = 1
         versionName = "ALPHA"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
