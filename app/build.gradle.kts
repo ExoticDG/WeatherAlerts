@@ -64,7 +64,13 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
     implementation(platform("androidx.compose:compose-bom:2025.02.00"))
     implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation("androidx.activity:activity-ktx:1.10.1")
+    implementation("androidx.fragment:fragment:1.8.6")
+    implementation("androidx.fragment:fragment-ktx:1.8.6")
+    implementation("androidx.fragment:fragment-compose:1.8.6")
+    debugImplementation("androidx.fragment:fragment-testing:1.8.6")
 
-     implementation(libs.material3)
-//    implementation(libs.androidx.material3.android)
+
+
 }

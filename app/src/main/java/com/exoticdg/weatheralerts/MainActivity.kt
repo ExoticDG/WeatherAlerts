@@ -1,26 +1,22 @@
 package com.exoticdg.weatheralerts
 
+
 import android.Manifest
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import com.exoticdg.weatheralerts.databinding.ActivityMainBinding
 
 
@@ -30,6 +26,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val overlayAlertGranted = 0
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -41,20 +39,35 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.settings, R.id.radarFragment, R.id.login
+                R.id.navigation_home,
+                R.id.navigation_dashboard,
+                R.id.navigation_notifications,
+                R.id.settings,
+                R.id.radarFragment,
+                R.id.login
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        requestPermissions()
 
+
+        requestLocationPermissions()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+
+            requestNotificationsPermissions()
+        }
+
+        requestOverlayPermission()
 
     }
     // end of 'onCreate'
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    fun requestPermissions() {
+
+            //Permissions
+
+            fun requestLocationPermissions() {
         val locationPermissionRequest = registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
         ) { permissions ->
@@ -62,21 +75,19 @@ class MainActivity : AppCompatActivity() {
                 permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
                     // Precise location access granted.
                 }
+
                 permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
                     // Only approximate location access granted.
                 }
-                else -> {
-                    // TODO req perms here
 
-                    DialogExamples()
+                else -> {
+
+                    //No location permission granteed
+
                 }
             }
         }
 
-        // Before you perform the actual permission request, check whether your app
-        // already has the permissions, and whether your app needs to show a permission
-        // rationale dialog. For more details, see Request permissions:
-        // https://developer.android.com/training/permissions/requesting#request-permission
         locationPermissionRequest.launch(
             arrayOf(
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -85,69 +96,80 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-}
+            @RequiresApi(33)
+            fun requestNotificationsPermissions() {
+                val locationPermissionRequest = registerForActivityResult(
+                    ActivityResultContracts.RequestMultiplePermissions()
+                ) { permissions ->
+                    when {
+                        permissions.getOrDefault(Manifest.permission.POST_NOTIFICATIONS, false) -> {
+                            // Notifications granted
+                        }
 
-@Composable
-fun AlertDialogExample(
-    onDismissRequest: () -> Unit,
-    onConfirmation: () -> Unit,
-    dialogTitle: String,
-    dialogText: String,
-    icon: ImageVector,
-) {
-    AlertDialog(
-        icon = {
-            Icon(icon, contentDescription = "Example Icon")
-        },
-        title = {
-            Text(text = dialogTitle)
-        },
-        text = {
-            Text(text = dialogText)
-        },
-        onDismissRequest = {
-            onDismissRequest()
-        },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    onConfirmation()
+                        else -> {
+
+                            //Notifications not granted
+
+                        }
+                    }
                 }
-            ) {
-                Text("Confirm")
-            }
-        },
-        dismissButton = {
-            TextButton(
-                onClick = {
-                    onDismissRequest()
-                }
-            ) {
-                Text("Dismiss")
-            }
-        }
-    )
-}
 
-@Composable
-fun DialogExamples() {
-    // ...
-    val openAlertDialog = remember { mutableStateOf(false) }
-
-    // ...
-    when {
-        // ...
-        openAlertDialog.value -> {
-            AlertDialogExample(
-                onDismissRequest = { openAlertDialog.value = false },
-                onConfirmation = {
-                    openAlertDialog.value = false
-                    println("Confirmation registered") // Add logic here to handle confirmation.
-                },
-                dialogTitle = "Alert dialog example",
-                dialogText = "This is an example of an alert dialog with buttons.",
-                icon = Icons.Default.Info
+                locationPermissionRequest.launch(
+                 arrayOf(
+                        Manifest.permission.POST_NOTIFICATIONS,
             )
-        }
-    }
+                )
+            }
+
+            private val settingsLauncher = registerForActivityResult(
+             ActivityResultContracts.StartActivityForResult()
+               ) { result ->
+                    // Recheck permission after returning from settings
+                    if (canDrawOverlays(this)) {
+
+                        // Permission is now granted
+
+                        val overlayAlertGranted = 1
+
+                    } else {
+
+                        // Permission is still not granted
+                        val text = "Please enable overlay permission for full Alert access."
+                        val duration = Toast.LENGTH_LONG
+
+                        val toast = Toast.makeText(this, text, duration) // in Activity
+                        toast.show()
+
+                        val overlayAlertGranted = 0
+                    }
+                }
+
+
+            private fun requestOverlayPermission() {
+                if (!canDrawOverlays(this)) {
+                    val intent = Intent(
+                     Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + packageName)
+                    )
+                    settingsLauncher.launch(intent)
+             } else {
+                    //Permission is granted
+                }
+            }
+
+            // Helper function to check if the app can draw over other apps
+            private fun canDrawOverlays(context: Context): Boolean {
+                 return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        Settings.canDrawOverlays(context)
+                 } else {
+                        true // In older Android versions, this was granted at install time
+                    }
+            }
+
+            //End of Permissions
+
+
 }
+
+
+
