@@ -5,7 +5,8 @@ The app that prioritizes your safety and security over profit.
 
 ![Logo](https://github.com/ExoticDG/WeatherAlerts/blob/main/app/src/main/ic_launcher-playstore.png)
 
-
+>[!IMPORTANT]
+>This reposotory is for the softwere. If you are looking for the documentation it is available at 'https://github.com/ExoticDG/WeatherAlerts--Docs'
 
 >[!WARNING]
 >
