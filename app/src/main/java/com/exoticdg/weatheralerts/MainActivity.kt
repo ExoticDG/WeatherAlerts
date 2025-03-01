@@ -13,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -154,6 +155,7 @@ class MainActivity : AppCompatActivity() {
                     settingsLauncher.launch(intent)
              } else {
                     //Permission is granted
+                    startOverlayService(context = this)
                 }
             }
 
@@ -167,6 +169,15 @@ class MainActivity : AppCompatActivity() {
             }
 
             //End of Permissions
+
+    fun startOverlayService(context: Context) {
+        val intent = Intent(context, OverlayService::class.java)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            ContextCompat.startForegroundService(context, intent)
+        } else {
+            context.startService(intent)
+        }
+    }
 
 
 }
