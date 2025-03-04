@@ -155,7 +155,7 @@ class MainActivity : AppCompatActivity() {
                     settingsLauncher.launch(intent)
              } else {
                     //Permission is granted
-                    startOverlayService(context = this)
+                    //startOverlayService(context = this)
                 }
             }
 
@@ -170,14 +170,14 @@ class MainActivity : AppCompatActivity() {
 
             //End of Permissions
 
-    fun startOverlayService(context: Context) {
-        val intent = Intent(context, OverlayService::class.java)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            ContextCompat.startForegroundService(context, intent)
-        } else {
-            context.startService(intent)
-        }
-    }
+//    fun startOverlayService(context: Context) {
+//        val intent = Intent(context, OverlayService::class.java)
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            ContextCompat.startForegroundService(context, intent)
+//        } else {
+//            context.startService(intent)
+//        }
+//    }
 
 
 }

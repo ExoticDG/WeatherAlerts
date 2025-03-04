@@ -54,6 +54,10 @@
         <service android:name=".OverlayService"
             android:exported="false"/>
 
+        <meta-data android:name="android.webkit.WebView.EnableSafeBrowsing"
+            android:value="false" />
+
+
     </application>
 
 </manifest>

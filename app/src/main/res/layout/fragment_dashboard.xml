@@ -19,4 +19,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <WebView
+        android:layout_width="409dp"
+        android:layout_height="446dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="https://webview-api-for-ads-test.glitch.me#webview-settings-tests " />
 </androidx.constraintlayout.widget.ConstraintLayout>
