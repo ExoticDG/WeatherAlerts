@@ -8,17 +8,21 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.exoticdg.weatheralerts.databinding.ActivityMainBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class MainActivity : AppCompatActivity() {
@@ -61,6 +65,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         requestOverlayPermission()
+
+
+//        CoroutineScope(Dispatchers.IO).launch {
+//            val apiResponse = com.exoticdg.weatheralerts.data.alerts.NWS_API.O_NWS_API.accessJsonLdApi("https://api.weather.gov")
+//            withContext(Dispatchers.Main) {
+//                apiResponse.forEach { (key, value) ->
+//                    Log.d("JsonLdApi", "key: $key")
+//                    if (value is Map<*, *>) {
+//                        value.forEach { (innerKey, innerValue) ->
+//                            Log.d("JsonLdApi", "  $innerKey: $innerValue")
+//                        }
+//                    }
+//                }
+//            }
+//        }
+
 
     }
     // end of 'onCreate'
@@ -110,6 +130,7 @@ class MainActivity : AppCompatActivity() {
                         else -> {
 
                             //Notifications not granted
+
 
                         }
                     }
@@ -178,7 +199,6 @@ class MainActivity : AppCompatActivity() {
 //            context.startService(intent)
 //        }
 //    }
-
 
 }
 

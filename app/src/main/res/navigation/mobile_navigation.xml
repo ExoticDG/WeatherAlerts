@@ -37,4 +37,6 @@
         android:name="com.exoticdg.weatheralerts.ui.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
+
+
 </navigation>

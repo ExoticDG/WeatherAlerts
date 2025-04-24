@@ -56,6 +56,9 @@ dependencies {
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.runtime.android)
     implementation(libs.androidx.ui.android)
+    implementation(libs.androidx.legacy.support.v4)
+    // implementation(libs.jsonld.java)
+    //implementation(libs.jackson.databind)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -70,6 +73,22 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.8.6")
     implementation("androidx.fragment:fragment-compose:1.8.6")
     debugImplementation("androidx.fragment:fragment-testing:1.8.6")
+
+    //API Intigration
+
+    // Retrofit for networking
+    implementation("com.squareup.retrofit2:retrofit:2.9.0") // Use the latest version
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0") // Gson converter
+
+    // Gson for JSON parsing (Retrofit uses this via the converter)
+    implementation("com.google.code.gson:gson:2.10.1") // Use the latest version
+
+    // Kotlin Coroutines for asynchronous operations
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3") // Use the latest version
+
+    // Lifecycle components for Coroutine Scopes (optional but recommended)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0") // Use the latest version
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
 
 
 
