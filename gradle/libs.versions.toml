@@ -1,6 +1,6 @@
 [versions]
 activity = "1.10.1"
-agp = "8.10.0-alpha06"
+agp = "8.11.0-alpha07"
 kotlin = "2.0.21"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -39,6 +39,7 @@ jsonldJava = "0.13.6"
 jacksonDatabind = "2.16.0"
 legacySupportV4 = "1.0.0"
 fragmentKtx = "1.8.6"
+playServicesLocation = "21.3.0"
 
 [libraries]
 androidx-activity = { module = "androidx.activity:activity", version.ref = "activity" }
@@ -84,6 +85,7 @@ jsonld-java = { group = "com.github.jsonld-java", name = "jsonld-java", version.
 jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-databind", version.ref = "jacksonDatabind" }
 androidx-legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupportV4" }
 androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -6,8 +6,8 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/fetchButton"
-        android:layout_width="wrap_content"
+        android:id="@+id/fetchByLocationButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="ALERT?"
         app:layout_constraintBottom_toTopOf="@+id/loadingIndicator"
@@ -17,13 +17,16 @@
 
     <TextView
         android:id="@+id/alertsTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/fetchByLocationButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loadingIndicator" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/loadingIndicator"
@@ -41,22 +44,18 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alertsTextView">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/alertsTextView"/>
 
     <TextView
         android:id="@+id/errorTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/stateEditText"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="errorTextView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alertsTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/loadingIndicator" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

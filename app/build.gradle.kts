@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.androidx.runtime.android)
     implementation(libs.androidx.ui.android)
     implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.play.services.location)
     // implementation(libs.jsonld.java)
     //implementation(libs.jackson.databind)
 

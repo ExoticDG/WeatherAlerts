@@ -13,15 +13,15 @@ import java.io.IOException // Import for exception handling
 class WeatherViewModel : ViewModel() {
 
     // LiveData to hold the list of alerts for the UI
-    private val _alerts = MutableLiveData<List<AlertFeature>?>()
+     val _alerts = MutableLiveData<List<AlertFeature>?>()
     val alerts: LiveData<List<AlertFeature>?> = _alerts // Expose immutable LiveData
 
     // LiveData for error messages
-    private val _errorMessage = MutableLiveData<String?>()
+     val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> = _errorMessage
 
     // LiveData for loading state
-    private val _isLoading = MutableLiveData<Boolean>()
+     val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
     // Function to fetch alerts for a specific area (e.g., state)
@@ -59,4 +59,5 @@ class WeatherViewModel : ViewModel() {
             }
         }
     }
+
 }

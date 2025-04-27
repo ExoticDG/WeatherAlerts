@@ -81,6 +81,7 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
 
+        Log.d("JsonLdApi", "End of onCreate")
 
     }
     // end of 'onCreate'
