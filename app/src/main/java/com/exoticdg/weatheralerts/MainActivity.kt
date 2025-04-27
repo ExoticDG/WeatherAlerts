@@ -2,18 +2,24 @@ package com.exoticdg.weatheralerts
 
 
 import android.Manifest
+import android.app.NotificationChannel
+import android.app.NotificationChannelGroup
+import android.app.NotificationManager
+import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.provider.Settings.Global.getString
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -81,7 +87,9 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
 
-        Log.d("JsonLdApi", "End of onCreate")
+        setupnotif()
+
+        Log.d("MAIN ACTIVITY", "End of onCreate")
 
     }
     // end of 'onCreate'
@@ -205,3 +213,30 @@ class MainActivity : AppCompatActivity() {
 
 
 
+fun setupnotif() {
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        // Create the NotificationChannel.
+        val name = "CHANNEL_NAME"
+        val descriptionText = "CHANNEL_DESCRIPTION"
+        val importance = NotificationManager.IMPORTANCE_HIGH
+        val CHANNEL_ID = null
+        val mChannel = NotificationChannel(CHANNEL_ID, name, importance)
+        mChannel.description = descriptionText
+        // Register the channel with the system. You can't change the importance
+        // or other notification behaviors after this.
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(mChannel)
+    }
+
+
+    // The id of the group.
+    val groupId = "my_group_01"
+    // The user-visible name of the group.
+    val groupName = "NAME"
+    val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    notificationManager.createNotificationChannelGroup(NotificationChannelGroup(groupId, groupName))
+
+
+
+}

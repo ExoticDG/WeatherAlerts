@@ -276,3 +276,9 @@ fun WeatherViewModel.fetchAlertsForLocation(lat: Double, lon: Double) {
         }
     }
 }
+
+
+fun alertnotif() {
+
+
+}
