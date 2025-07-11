@@ -3,10 +3,13 @@ The app that prioritizes your safety and security over profit.
 
 
 
-![Logo](https://github.com/ExoticDG/WeatherAlerts/blob/main/app/src/main/ic_launcher-playstore.png)
+![WeatherAlerts Logo](https://github.com/ExoticDG/WeatherAlerts/blob/main/app/src/main/ic_launcher-playstore.png)
 
 >[!IMPORTANT]
->This reposotory is for the softwere. If you are looking for the documentation it is available at 'https://github.com/ExoticDG/WeatherAlerts--Docs'
+>This repository is for the software. If you are looking for the documentation it is available at 'https://github.com/ExoticDG/WeatherAlerts--Docs'
+
+>[!IMPORTANT]
+>This repository dose not contain ALL files as som e require confidentiality. An example of this is google-services.json which contains sensitive information that requires security for the security of the end user.
 
 >[!WARNING]
 >
@@ -20,7 +23,7 @@ The app that prioritizes your safety and security over profit.
 >
 
 >[!IMPORTANT]
->This application is only avalible for Android[^1]. As of 1/23/25 I will not be porting this to iOS[^2] and dont plan on ever doing so, due to multiple reasons such as my dislike for iOS[^2] and the diffrences in coding apps for each operating system.
+>This application is only available for Android[^1]. As of 1/23/25 I will not be porting this to iOS[^2] and don't plan on ever doing so, due to multiple reasons such as my dislike for iOS[^2] and the differences in coding apps for each operating system.
 
 
 

@@ -21,8 +21,11 @@ import com.exoticdg.weatheralerts.data.alerts.AlertFeature // Import your data c
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Notification
+import android.app.NotificationManager
 import android.content.pm.PackageManager // Still needed for SuppressLint check
 import android.util.Log
+import androidx.core.app.NotificationCompat
 //import android.os.Bundle
 //import android.view.View
 //import android.widget.Button
@@ -30,6 +33,7 @@ import android.util.Log
 //import android.widget.TextView
 //import android.widget.Toast
 import androidx.core.content.ContextCompat // Still needed for SuppressLint check
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.viewModelScope
 import com.exoticdg.weatheralerts.network.RetrofitClient
 //import androidx.fragment.app.Fragment
@@ -278,7 +282,24 @@ fun WeatherViewModel.fetchAlertsForLocation(lat: Double, lon: Double) {
 }
 
 
-fun alertnotif() {
+//fun alertnotif() {
+//    val CHANNEL_ID = "TORNADO_ALERT"
+//
+//    var tornaticbuilder = NotificationCompat.Builder(this, CHANNEL_ID)
+//        .setSmallIcon(R.mipmap.ic_launcher_round)
+//        .setContentTitle("textTitle")
+//        .setContentText("textContent")
+//        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//
+//    val tornaticnotification = NotificationCompat.Builder(this, CHANNEL_ID)
+//        .setSmallIcon(R.mipmap.ic_launcher_round)
+//        .setContentTitle("")
+//        .setContentText("")
+//        .setLargeIcon((R.mipmap.ic_launcher_round)
+//        .setStyle(NotificationCompat.BigTextStyle()
+//            .bigText("")
+//        .build()))
+//
+//}
 
 
-}

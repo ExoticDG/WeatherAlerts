@@ -92,5 +92,14 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
 
 
+    //Notif
+
+    implementation("androidx.core:core-ktx:1.16.0")
+
+    //Webview
+
+    implementation("androidx.webkit:webkit:1.8.0")
+
+
 
 }
