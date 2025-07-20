@@ -10,7 +10,7 @@ IE I dont sell your data. Or request money from you. I just provide weather.
 >This repository is for the software. If you are looking for the documentation it is available at 'https://github.com/ExoticDG/WeatherAlerts--Docs'
 
 >[!IMPORTANT]
->This repository dose not contain ALL files as som e require confidentiality. An example of this is google-services.json which contains sensitive information that requires security for the security of the end user.
+>This repository does not contain ALL files as some require confidentiality. An example of this is google-services.json which contains sensitive information that requires security for the security of the end user.
 
 >[!WARNING]
 >
