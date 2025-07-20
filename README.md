@@ -1,7 +1,7 @@
 # Weather Alerts
 The app that prioritizes your safety and security over profit.
 
-IE I dont sell your data. Or request money from you. I just provide weather.
+I.E: I dont sell your data. Or request money from you. I just provide weather.
 
 
 ![WeatherAlerts Logo](https://github.com/ExoticDG/WeatherAlerts/blob/main/app/src/main/ic_launcher-playstore.png)
