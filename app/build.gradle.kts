@@ -100,6 +100,7 @@ dependencies {
 
     implementation("androidx.webkit:webkit:1.8.0")
 
-
+    //Background Running for Alerts
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
 
 }

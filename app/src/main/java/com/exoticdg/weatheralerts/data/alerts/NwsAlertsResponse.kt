@@ -14,6 +14,10 @@ data class AlertFeature(
 )
 
 data class AlertProperties(
+
+    @SerializedName("id") // Make sure this matches the JSON key from the API
+    val id: String? = null, // Unique identifier for the alert
+
     @SerializedName("event")
     val event: String? = null, // Name of the alert/warning/watch
 

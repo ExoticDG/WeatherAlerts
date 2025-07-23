@@ -1,56 +1,28 @@
-// WeatherFragment.kt
 package com.exoticdg.weatheralerts.ui // Adjust package name
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels // Use this for fragment-scoped ViewModel
 import androidx.lifecycle.Observer
 import com.exoticdg.weatheralerts.R // Your R file
 import com.exoticdg.weatheralerts.data.alerts.AlertFeature // Import your data class
-// ViewModel should ideally be in its own file, but ensure it's accessible
-// import com.yourapp.ui.WeatherViewModel
-// WeatherFragment.kt (Assuming permission checks are done elsewhere)
-
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Notification
-import android.app.NotificationManager
 import android.content.pm.PackageManager // Still needed for SuppressLint check
 import android.util.Log
-import androidx.core.app.NotificationCompat
-//import android.os.Bundle
-//import android.view.View
-//import android.widget.Button
-//import android.widget.ProgressBar
-//import android.widget.TextView
-//import android.widget.Toast
 import androidx.core.content.ContextCompat // Still needed for SuppressLint check
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.viewModelScope
 import com.exoticdg.weatheralerts.network.RetrofitClient
-//import androidx.fragment.app.Fragment
-//import androidx.fragment.app.viewModels
-//import androidx.lifecycle.Observer
-// Required imports for location
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
 import kotlinx.coroutines.launch
 import java.io.IOException
-
-//import com.yourapp.R
-//import com.yourapp.data.AlertFeature
-// ViewModel needs the fetchAlertsForLocation function from the previous example
-// import com.yourapp.ui.WeatherViewModel
 
 
 class AlertFragment : Fragment(R.layout.fragment_alert) {
@@ -222,19 +194,6 @@ class AlertFragment : Fragment(R.layout.fragment_alert) {
         alertsTextView.text = formattedText.toString()
         alertsTextView.scrollTo(0,0)
 
-//        alertsTextView.text = " \${AlertProperties.headline} , \${AlertProperties.event} , \${AlertProperties.severity} , \${AlertProperties.areaDesc}"
-//        alertsTextView.visibility = View.VISIBLE
-//        Log.d("AlertFragment", "\${AlertProperties.headline}")
-
-//        if (alerts.isEmpty()) {
-//            alertsTextView.text = "No active alerts found for your location."
-//            alertsTextView.visibility = View.VISIBLE
-//            Log.d("AlertFragment", "\${props.headline}")
-//        } else {
-//            alertsTextView.text = " \${props.headline} , \${props.event} , \${props.severity} , \${props.areaDesc}"
-//            alertsTextView.visibility = View.VISIBLE
-//            Log.d("AlertFragment", "\${props.headline}")
-//        }
     }
 
     }
@@ -282,24 +241,5 @@ fun WeatherViewModel.fetchAlertsForLocation(lat: Double, lon: Double) {
 }
 
 
-//fun alertnotif() {
-//    val CHANNEL_ID = "TORNADO_ALERT"
-//
-//    var tornaticbuilder = NotificationCompat.Builder(this, CHANNEL_ID)
-//        .setSmallIcon(R.mipmap.ic_launcher_round)
-//        .setContentTitle("textTitle")
-//        .setContentText("textContent")
-//        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-//
-//    val tornaticnotification = NotificationCompat.Builder(this, CHANNEL_ID)
-//        .setSmallIcon(R.mipmap.ic_launcher_round)
-//        .setContentTitle("")
-//        .setContentText("")
-//        .setLargeIcon((R.mipmap.ic_launcher_round)
-//        .setStyle(NotificationCompat.BigTextStyle()
-//            .bigText("")
-//        .build()))
-//
-//}
 
 
