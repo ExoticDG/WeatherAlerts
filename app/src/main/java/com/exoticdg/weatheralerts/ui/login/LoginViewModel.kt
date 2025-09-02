@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.util.Patterns
-import com.exoticdg.weatheralerts.data.LoginRepository
 import com.exoticdg.weatheralerts.data.Result
 
 import com.exoticdg.weatheralerts.R

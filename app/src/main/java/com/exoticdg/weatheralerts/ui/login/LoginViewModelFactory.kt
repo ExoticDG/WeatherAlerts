@@ -2,8 +2,6 @@ package com.exoticdg.weatheralerts.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.exoticdg.weatheralerts.data.LoginDataSource
-import com.exoticdg.weatheralerts.data.LoginRepository
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.
