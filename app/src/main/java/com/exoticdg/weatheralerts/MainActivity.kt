@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_notifications,
                 R.id.settings,
                 R.id.radarFragment,
-                R.id.login
+//                R.id.login
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

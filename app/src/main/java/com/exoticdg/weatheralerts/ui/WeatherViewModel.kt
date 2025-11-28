@@ -30,11 +30,9 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
     // This is a simple in-memory cache. For persistence, you'd use SharedPreferences or a database.
     private val notifiedAlertIds = mutableSetOf<String>()
 
-    private val notificationHelper = NotificationHelper(application)
-
     init {
         // Ensure notification channel is created when ViewModel is initialized
-        notificationHelper.createNotificationChannel()
+        NotificationHelper.createNotificationChannel(application)
     }
 
 
@@ -107,10 +105,10 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
             // For simplicity, let's send one for the first new alert.
             val firstNewAlert = trulyNewAlerts.first().properties
             if (firstNewAlert != null) {
-                notificationHelper.sendWeatherAlertNotification(
-                    title = firstNewAlert.event ?: "New Weather Alert",
-                    message = firstNewAlert.headline ?: "Check the app for details.",
-                    alertId = firstNewAlert.id ?: "unknown_alert_${System.currentTimeMillis()}" // Pass a unique ID for the notification itself
+                NotificationHelper.showNewAlertNotification(
+                    context = getApplication(),
+                    event = firstNewAlert.event ?: "New Weather Alert",
+                    headline = firstNewAlert.headline ?: "Check the app for details."
                 )
             }
         }
