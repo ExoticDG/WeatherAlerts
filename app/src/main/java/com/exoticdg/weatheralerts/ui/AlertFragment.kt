@@ -15,15 +15,10 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager // Still needed for SuppressLint check
 import android.util.Log
 import androidx.core.content.ContextCompat // Still needed for SuppressLint check
-import androidx.lifecycle.viewModelScope
-import com.exoticdg.weatheralerts.network.RetrofitClient
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
-import kotlinx.coroutines.launch
-import java.io.IOException
-
 
 class AlertFragment : Fragment(R.layout.fragment_alert) {
 
@@ -36,8 +31,8 @@ class AlertFragment : Fragment(R.layout.fragment_alert) {
     // Views
     private lateinit var alertsTextView: TextView
     private lateinit var errorTextView: TextView
-    private lateinit var loadingIndicator: ProgressBar
-    private lateinit var fetchByLocationButton: Button // Or however you trigger it
+    //    private lateinit var loadingIndicator: ProgressBar
+    private lateinit var fetchByLocationButton: Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,105 +43,69 @@ class AlertFragment : Fragment(R.layout.fragment_alert) {
         // Initialize Views
         alertsTextView = view.findViewById(R.id.alertsTextView)
         errorTextView = view.findViewById(R.id.errorTextView)
-        loadingIndicator = view.findViewById(R.id.loadingIndicator)
-        fetchByLocationButton = view.findViewById(R.id.fetchByLocationButton) // Example trigger
+//        loadingIndicator = view.findViewById(R.id.loadingIndicator)
+        fetchByLocationButton = view.findViewById(R.id.fetchByLocationButton)
 
         // 2. Setup Trigger (e.g., Button Click)
-        // Make sure this listener is only set up once
         fetchByLocationButton.setOnClickListener {
-            // IMPORTANT: Call your existing permission check logic here first!
-            // if (yourPermissionCheckFunctionReturnsTrue()) {
-            //    getLocationAndFetchWeather()
-            // } else {
-            //    // Handle the case where permission is somehow not granted
-            //    showError("Location permission is required.")
-            // }
-
-            // --- OR --- If you are CERTAIN permission is granted when this is clicked:
-            getLocationAndFetchWeather() // Directly call fetch if permission guaranteed
+            getLocationAndFetchWeather()
         }
-
-        // Optional: Fetch automatically if permission granted on start?
-        // if (yourPermissionCheckFunctionReturnsTrue()) {
-        //    getLocationAndFetchWeather()
-        // }
 
         setupObservers()
     }
 
-    /**
-     * Fetches the current location and triggers the ViewModel to get weather alerts.
-     * IMPORTANT: This function ASSUMES location permissions (FINE or COARSE)
-     * have already been granted by the user. Call this *after* your permission checks.
-     */
-    // Suppress warning because we explicitly check/require permission before calling this
     @SuppressLint("MissingPermission")
     private fun getLocationAndFetchWeather() {
-        // Ensure required permissions are actually granted before proceeding
         val hasFineLocation = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
         val hasCoarseLocation = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
 
         if (!hasFineLocation && !hasCoarseLocation) {
             showError("Location permission check failed unexpectedly.")
-            setLoadingState(false)
-            return // Don't proceed without permission
+//            setLoadingState(false)
+            return
         }
 
-        setLoadingState(true)
-        showError(null) // Clear previous errors
+//        setLoadingState(true)
+        showError(null)
 
-        // Use appropriate priority. Balanced is usually good.
         val priority = Priority.PRIORITY_BALANCED_POWER_ACCURACY
-        cancellationTokenSource = CancellationTokenSource() // Reset cancellation token
+        cancellationTokenSource = CancellationTokenSource()
 
         fusedLocationClient.getCurrentLocation(priority, cancellationTokenSource.token)
             .addOnSuccessListener { location ->
                 if (location != null) {
-                    // 3. Location obtained - Call ViewModel
-                    val lat = location.latitude
-                    val lon = location.longitude
-                    weatherViewModel.fetchAlertsForLocation(lat, lon) // Ensure ViewModel has this function
+                    weatherViewModel.fetchAlertsForLocation(location.latitude, location.longitude)
                 } else {
                     showError("Could not get current location. Please ensure location services are enabled.")
-                    setLoadingState(false)
+//                    setLoadingState(false)
                 }
             }
             .addOnFailureListener { e ->
-                // 4. Handle Failure
                 showError("Failed to get location: ${e.message}")
-                setLoadingState(false)
+//                setLoadingState(false)
             }
     }
 
     override fun onStop() {
         super.onStop()
-        // 5. Cancel request if fragment stops
         cancellationTokenSource.cancel()
     }
 
-    // --- Helper Functions (Keep these from previous example) ---
     private fun setupObservers() {
-        // Observer for loading state
-        weatherViewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
-            if (!isLoading) { // Only hide indicator when VM confirms loading finished
-                loadingIndicator.visibility = View.GONE
-            }
-        })
-        // Observer for error messages
+//        weatherViewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
+//            setLoadingState(isLoading)
+//        })
         weatherViewModel.errorMessage.observe(viewLifecycleOwner, Observer { errorMessage ->
             showError(errorMessage)
+            if (errorMessage != null) {
+                alertsTextView.visibility = View.GONE // Hide alerts when error is shown
+            }
         })
-        // Observer for alerts data
         weatherViewModel.alerts.observe(viewLifecycleOwner, Observer { alertFeatures ->
-            // ... (logic to display alerts or 'no alerts' message) ...
-            // (Same as in the previous detailed example)
             if (alertFeatures != null) {
+                showError(null) // Always clear error when new data arrives
                 alertsTextView.visibility = View.VISIBLE
                 displayAlerts(alertFeatures)
-                // Hide error message if alerts are successfully displayed
-                if (errorTextView.text.startsWith("Error fetching alerts")) {
-                    showError(null)
-                }
             } else {
                 if (weatherViewModel.isLoading.value == false && weatherViewModel.errorMessage.value == null && errorTextView.visibility == View.GONE) {
                     alertsTextView.text = "Click button to fetch alerts for your location."
@@ -158,23 +117,21 @@ class AlertFragment : Fragment(R.layout.fragment_alert) {
         })
     }
 
-    private fun setLoadingState(isLoading: Boolean) {
-        loadingIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
-        fetchByLocationButton.isEnabled = !isLoading // Disable button while loading
-    }
+//    private fun setLoadingState(isLoading: Boolean) {
+//        loadingIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
+//        fetchByLocationButton.isEnabled = !isLoading
+//    }
 
     private fun showError(message: String?) {
         if (message != null) {
             errorTextView.text = message
             errorTextView.visibility = View.VISIBLE
-            alertsTextView.visibility = View.GONE
         } else {
             errorTextView.visibility = View.GONE
         }
     }
 
     private fun displayAlerts(alerts: List<AlertFeature>) {
-        // ... (implementation from previous step - unchanged) ...
         if (alerts.isEmpty()) {
             alertsTextView.text = "No active alerts found for your location."
             return
@@ -184,62 +141,16 @@ class AlertFragment : Fragment(R.layout.fragment_alert) {
         alerts.forEachIndexed { index, feature ->
             val props = feature.properties
             if (props != null) {
-                formattedText.append("--- Alert ${index + 1} ---\n")
-                formattedText.append("Type: ${props.event ?: "N/A"}\n")
-                formattedText.append("Severity: ${props.severity ?: "N/A"}\n")
-                formattedText.append("Areas: ${props.areaDesc ?: "N/A"}\n")
-                formattedText.append("Headline: ${props.headline ?: "N/A"}\n")
+                formattedText.append("\n\n--- Alert ${index + 1} ---")
+                formattedText.append("\n\nEvent: ${props.event ?: "N/A"}")
+                formattedText.append("\n\nSeverity: ${props.severity ?: "N/A"}")
+                formattedText.append("\n\nAreas: ${props.areaDesc ?: "N/A"}")
+                formattedText.append("\n\nHeadline: ${props.headline ?: "N/A"}")
+                formattedText.append("\n\nDescription:\n${props.description ?: "N/A"}")
+                formattedText.append("\n\nAction:\n${props.instruction ?: "N/A"}")
             }
         }
         alertsTextView.text = formattedText.toString()
         alertsTextView.scrollTo(0,0)
-
-    }
-
-    }
-
-
-fun WeatherViewModel.fetchAlertsForLocation(lat: Double, lon: Double) {
-    _isLoading.postValue(true) // Use postValue if called from background thread potentially
-    _errorMessage.postValue(null)
-
-    // Format the coordinates for the API query parameter
-//    val latitude = 36.017739
-//    val longitude = -91.126278
-    val latitude = lat
-    val longitude = lon
-
-    val pointString = String.format("%.4f,%.4f", latitude,longitude) // Format to 4 decimal places
-    Log.d("LOCATION", "$latitude, $longitude")
-
-    viewModelScope.launch {
-        try {
-            val apiService = RetrofitClient.instance
-            // Call the new service method
-            val response = apiService.getActiveAlertsByPoint(point = pointString)
-
-            if (response.isSuccessful) {
-                val nwsResponse = response.body()
-                _alerts.postValue(nwsResponse?.features)
-            } else {
-                // Handle API errors (4xx, 5xx)
-                _errorMessage.postValue("Error fetching alerts: ${response.code()} ${response.message()}")
-                _alerts.postValue(null) // Clear data on error
-            }
-        } catch (e: IOException) {
-            // Handle network errors
-            _errorMessage.postValue("Network error fetching alerts: ${e.message}")
-            _alerts.postValue(null)
-        } catch (e: Exception) {
-            // Handle other errors (like JSON parsing)
-            _errorMessage.postValue("An unexpected error occurred: ${e.message}")
-            _alerts.postValue(null)
-        } finally {
-            _isLoading.postValue(false)
-        }
     }
 }
-
-
-
-

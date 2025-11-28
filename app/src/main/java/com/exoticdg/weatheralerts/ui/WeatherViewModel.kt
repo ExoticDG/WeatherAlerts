@@ -52,6 +52,7 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
                 val response = apiService.getActiveAlertsByPoint(point = pointString)
 
                 if (response.isSuccessful) {
+                    _errorMessage.postValue(null) // Clear any stale error message
                     val nwsResponse = response.body()
                     val newAlerts = nwsResponse?.features
 

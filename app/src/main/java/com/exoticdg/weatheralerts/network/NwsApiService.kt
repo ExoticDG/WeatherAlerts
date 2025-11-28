@@ -26,7 +26,7 @@ interface NwsApiService {
         // Example: Filter by message type ('alert', 'update')
         @Query("message_type") messageType: String = "alert",
         // NWS API requires a User-Agent, often email or website
-        @Header("User-Agent") userAgent: String = "(WeatherAlerts, ExoticDarknessGaming)"
+        @Header("User-Agent") userAgent: String = "(WeatherAlerts, https://www.github.com/exoticdg/WeatherAlerts)"
     ): Response<NwsAlertsResponse>// Use Response<> to get status codes, headers etc.
     // Use 'suspend' for Coroutines
 
@@ -34,7 +34,7 @@ interface NwsApiService {
     suspend fun getActiveAlertsByPoint(
         // NWS API expects point as "latitude,longitude" string
         @Query("point") point: String, // e.g., "34.05,-118.24"
-        @Header("User-Agent") userAgent: String = "(WeatherAlerts, ExoticDarknessGaming)" // **Remember to set this**
+        @Header("User-Agent") userAgent: String = "(WeatherAlerts, https://www.github.com/exoticdg/WeatherAlerts)" // **Remember to set this**
     ): Response<NwsAlertsResponse> // Response allows checking status code etc.
 
 

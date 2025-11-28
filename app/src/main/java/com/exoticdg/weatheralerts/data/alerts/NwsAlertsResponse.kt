@@ -13,6 +13,13 @@ data class AlertFeature(
     val properties: AlertProperties? = null
 )
 
+data class Geocode(
+    @SerializedName("SAME")
+    val SAME: List<String>? = null,
+    @SerializedName("UGC")
+    val UGC: List<String>? = null
+)
+
 data class AlertProperties(
 
     @SerializedName("id") // Make sure this matches the JSON key from the API
@@ -33,6 +40,9 @@ data class AlertProperties(
     @SerializedName("areaDesc")
     val areaDesc: String? = null, // Description of the affected area
 
+    @SerializedName("geocode")
+    val geocode: Geocode? = null, // Correctly typed as an object
+
     @SerializedName("effective")
     val effective: String? = null, // Start time (ISO 8601 format)
 
@@ -43,7 +53,10 @@ data class AlertProperties(
     val certainty: String? = null, // certainty of the alert (e.g., "Observed", "Likely", "Possible")
 
     @SerializedName("instruction")
-    val instruction: String? = null // instructions for proceeding
+    val instruction: String? = null, // instructions for proceeding
+
+    @SerializedName("parameters")
+    val parameters: Map<String, List<String>>? = null // Changed from String to Map
 
 
 // Add other properties you need from the API response
