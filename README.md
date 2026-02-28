@@ -5,6 +5,8 @@ I.E: I dont sell your data. Or request money from you. I just provide weather.
 
 >[!IMPORTANT]
 >This repository is for the software. If you are looking for the documentation it is available at 'https://github.com/ExoticDG/WeatherAlerts--Docs'
+>
+>This reposotory is for the potentially new Rust verstion. For the current verstion see `https://github.com/ExoticDG/WeatherAlerts-Kotlin`
 
 >[!IMPORTANT]
 >This repository does not contain ALL files as some require confidentiality. An example of this is google-services.json which contains sensitive information that requires security for the security of the end user.
